@@ -1,0 +1,47 @@
+{% extends 'main_header.html' %}
+{% block main_content %}
+<div class="card shadow-lg">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Checkout Form</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        {{ form.fullname }}
+                        {% if form.fullname.errors %}
+                            <div class="error">{{ form.fullname.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="error">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                            <div class="error">{{ form.phone.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        {{ form.adress }}
+                        {% if form.adress.errors %}
+                            <div class="error">{{ form.adress.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Place Order</button>
+                </form>
+            </div>
+        </div>
+{% endblock %}

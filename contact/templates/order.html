@@ -1,0 +1,47 @@
+{% extends 'main_header.html' %}
+{%  block main_content %}
+<div class="container py-5">
+    <h2 class="mb-4">Your Cart</h2>
+
+
+        <div class="table-responsive mb-4">
+            <table class="table table-bordered align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Size</th>
+                        <th>Qty</th>
+                        <th>Color</th>
+                        <th>Total</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {% for item in order %}
+                        <tr>
+                                <td>{{ item.product.title }}</td>
+                                <td>${{ item.price}}</td>
+                                <td>{{ item.size }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.color }}</td>
+                                <td>${{ item.total }}</td>
+                                <td>
+                                    <form method="POST" action="{% url 'delete_product' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">✕</button>
+                                    </form>
+                                </td>
+                        </tr>
+                        {% endfor %}
+                    <tr class="table-secondary fw-bold">
+                        <td colspan="5" class="text-end">Total:</td>
+                        <td>{{ all_sum }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+         <a href="{% url 'checkout' %}" class="btn btn-success w-100">Place Order</a>
+</div>
+
+{% endblock %}
