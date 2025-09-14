@@ -45,8 +45,8 @@ My_clothes_shop
 
 1. Clone the repository  
 ```bash
-git clone https://github.com/your-username/online-clothing-store.git
-cd online-clothing-store
+git clone https://github.com/vanyas627/clothes-shop.git
+сd My_clothes_shop
 
 Create and activate virtual environment
 
