@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Peculiarities, About_Us, Services
+from products.models import Brand
+from .models import Peculiarities, AboutUs, Services
 from products.models import Products,CategoriesProduct,Images
 def home_view(request):
     peculiarities = Peculiarities.objects.filter(is_visible=True)
@@ -14,7 +15,9 @@ def home_view(request):
                                                  'categories': categories})
 
 def about_view(request):
-    about = About_Us.objects.get()
+    about = AboutUs.objects.get()
     services = Services.objects.all()
+    brands = Brand.objects.all()
     return render(request,'about.html', context={'about': about,
-                                                 'services': services})
+                                                 'services': services,
+                                                 'brand': brands})

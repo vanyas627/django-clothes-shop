@@ -26,7 +26,7 @@ from users.views import register_view, login_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
-    path('users/', include('users.urls')),
+    path('', include('users.urls')),
     path('about/', about_view, name='about'),
     path('contact/', contact_view, name='contact'),
     path('category/', products_in_category_view, name='category'),
@@ -35,7 +35,7 @@ urlpatterns = [
     path('order/delete/<int:item_id>/', delete_item_in_cart, name='delete_product'),
     path('category/<slug:slug>/', products_in_category_view, name='category_products'),
     path('product/<slug:slug>', product_view, name='product'),
-    path('history/', history_orders_views, name='history')
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

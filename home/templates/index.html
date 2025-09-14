@@ -1,4 +1,5 @@
 {% extends 'main_header.html' %}
+{% load static %}
 
 {%  block main_content %}
     <!-- Start Banner Hero -->
@@ -74,7 +75,7 @@
         <div class="row">
             {% for item in categories %}
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href=""><img src="{{ item.photo.image.url}}" class="rounded-circle img-fluid border"></a>
+                <a href="#"><img src="{{ item.photo.image.url}}" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">{{ item.category.title }}</h5>
                 <p class="text-center"><a class="btn btn-success" href="{% url 'category_products' item.category.slug %}">Go Shop</a></p>
             </div>
@@ -91,7 +92,7 @@
                 <div class="col-lg-6 m-auto">
                     <h1 class="h1">Featured Product</h1>
                     <p>
-                        The soon...
+                        Here our the best products!
                     </p>
                 </div>
             </div>
@@ -100,17 +101,14 @@
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="{% url 'product' item.slug %}">
-                            <img src="{{ item.photo.url }}" class="card-img-top" alt="">
+                            {% if item.photo %}
+                                <img src="{{ item.photo.url }}" class="card-img-top" alt="">
+                            {% else %}
+                                <img src="{% static 'assets/img/ajax-loader.gif' %}" class="card-img-top" alt="">
+                            {% endif %}
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
                                 <li class="text-muted text-right">${{ item.price }}</li>
                             </ul>
                             <a href="{% url 'product' item.slug %}" class="h2 text-decoration-none text-dark">{{ item.title }}</a>

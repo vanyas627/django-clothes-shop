@@ -67,7 +67,7 @@ class Products(models.Model):
     is_featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=True)
     rating = models.PositiveSmallIntegerField(default=0)
-    comments = models.PositiveSmallIntegerField(default=0) # Сделать что то с доступными цветами, размерами, также исправить коменты, рейтинг
+    comments = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self):
         return f'{self.title}'
@@ -83,8 +83,7 @@ class Images(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='products/')
     is_visible = models.BooleanField(default=False)
-    featured_photo = models.BooleanField(default=False) # Сделать слайд фоток в шоп сингл
-
+    featured_photo = models.BooleanField(default=False)
 
 
     class Meta:

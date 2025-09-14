@@ -1,4 +1,5 @@
 {% extends 'main_header.html' %}
+{% load static %}
 {% block main_content %}
 <body>
     <!-- Open Content -->
@@ -7,7 +8,11 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="{{ product.photo.url}}" alt="Card image cap" id="product-detail">
+                        {%  if product.photo %}
+                            <img class="card-img img-fluid" src="{{ product.photo.url}}" alt="Card image cap" id="product-detail">
+                        {% else %}
+                            <img src="{% static 'assets/img/ajax-loader.gif' %}" class="card-img-top" alt="">
+                        {% endif %}
                     </div>
                     <div class="row">
                         <!--Start Controls-->
@@ -96,11 +101,13 @@
                                 <li>{{ item.text }}</li>
                                 {% endfor %}
                             </ul>
-
                             <form action="/order/" method="POST">
                                 {% csrf_token %}
+                            {% if user.is_authenticated %}
                                 <input type="hidden" name="product-id" value="{{ product.id }}">
-
+                            {% else %}
+                                <a class="nav-icon position-relative text-decoration-none" href="{% url 'login' %}"></a>
+                            {% endif %}
                             <div class="mb-4">
                             <h6>Available Color:</h6>
                                 <div class="btn-group" role="group">
@@ -141,14 +148,10 @@
                                     </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
-                                    </div>
-                                    <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
@@ -173,33 +176,12 @@
                             <img class="card-img rounded-0 img-fluid" src="{{ item.photo.url }}">
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
-                                    <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
                                     <li><a class="btn btn-success text-white mt-2" href="{% url 'product' item.slug %}"><i class="far fa-eye"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card-body">
                             <a href="{% url 'product' item.slug %}" class="h3 text-decoration-none">{{ item.title }}</a>
-                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                <li>M/L/X/XL</li>
-                                <li class="pt-2">
-                                    <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                                </li>
-                            </ul>
-                            <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                            </ul>
                             <p class="text-center mb-0">${{ item.price }}</p>
                         </div>
                     </div>

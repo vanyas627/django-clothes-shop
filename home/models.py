@@ -9,16 +9,20 @@ class Peculiarities(models.Model):
     is_visible = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return f'{self.title}'
 
+
     class Meta:
         ordering = ['-created']
+        verbose_name = 'Peculiarities'
+        verbose_name_plural = 'Peculiarities'
 
 
-class About_Us(models.Model):
+class AboutUs(models.Model):
 
-    desription1 = models.TextField(max_length=200)
+    description1 = models.TextField(max_length=200)
     image = models.ImageField(upload_to='about/')
     services_title = models.CharField(max_length=50)
     services_description = models.TextField(max_length=200)
@@ -26,6 +30,12 @@ class About_Us(models.Model):
 
     def __str__(self):
         return f'{self.services_title}'
+
+
+    class Meta:
+        verbose_name = 'AboutUs'
+        verbose_name_plural = 'AboutUs'
+
 
 
 class Services(models.Model):
@@ -46,3 +56,8 @@ class Services(models.Model):
 
     def __str__(self):
         return f'{self.service}'
+
+
+    class Meta:
+        verbose_name = 'Services'
+        verbose_name_plural = 'Services'

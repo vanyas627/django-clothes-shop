@@ -147,13 +147,9 @@
                 <div class="col-md-4">
                     <h2 class="h2 text-light">Products</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a href="#">Luxury</a></li>
-                        <li><a href="#">Sport Wear</a></li>
-                        <li><a href="#">Men's Shoes</a></li>
-                        <li><a href="#">Women's Shoes</a></li>
-                        <li><a href="#">Popular Dress</a></li>
-                        <li><a href="#">Gym Accessories</a></li>
-                        <li><a href="#">Sport Shoes</a></li>
+                        {% for item in category %}
+                        <li><a href="{% url 'category_products' item.slug %}">{{ item.title }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
 
@@ -162,8 +158,6 @@
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'about' %}">About Us</a></li>
-                        <li><a href="#">Shop Locations</a></li>
-                        <li><a href="#">FAQs</a></li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
                 </div>
@@ -180,12 +174,6 @@
                         <li class="list-inline-item"><a href="https://twitter.com/" class="text-light"><i class="fab fa-twitter fa-lg"></i></a></li>
                         <li class="list-inline-item"><a href="https://www.linkedin.com/" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a></li>
                     </ul>
-                </div>
-                <div class="col-auto">
-                    <div class="input-group mb-2">
-                        <input type="email" class="form-control bg-dark border-light" placeholder="Email address">
-                        <div class="input-group-text btn-success text-light">Subscribe</div>
-                    </div>
                 </div>
             </div>
         </div>

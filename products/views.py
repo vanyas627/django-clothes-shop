@@ -1,4 +1,5 @@
 from django.shortcuts import render,get_object_or_404
+from django.core.paginator import Paginator
 from .models import CategoriesProduct,Products,Specification,Images, Brand, Color, Size
 
 
@@ -39,9 +40,13 @@ def products_in_category_view(request,slug=None):
     elif sort_option == 'price_desc':
         products = products.order_by('-price')
 
+    paginator = Paginator(products, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
 
     return render(request, 'shop.html', context={
-        'products': products,
+        'products': page_obj,
         'categories': categories,
         'brands': brands,
         'colors': colors,

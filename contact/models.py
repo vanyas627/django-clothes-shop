@@ -24,9 +24,9 @@ class Order(models.Model):
 
     fullname = models.CharField(max_length=100, blank=False, null=True)
     email = models.EmailField(blank=False, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True, validators=[phone_validators]) #Сделать валидатор и также вывод ошибок в шаблоне если валидатор не сработает
+    phone = models.CharField(max_length=20, blank=True, null=True, validators=[phone_validators])
     adress = models.CharField(max_length=200, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True) #Посмотреть что не так, в истории заказов не сохраняется дата
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Orders'
